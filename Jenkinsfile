@@ -30,9 +30,9 @@ pipeline {
           when {
             expression { env.API_VERSION ==  'google'}
           }
-          steps {
+          steps { 
             dir('helloWorld') {
-                sh 'pwd'
+                println "---------- helloWorld Proxie ----------"
                 sh """
                   mvn clean install \
                   -Ptest \
@@ -42,7 +42,7 @@ pipeline {
                 """
             }
             dir('oauth_v2') {
-                sh 'pwd'
+                println "---------- oauth_v2 Proxie ----------"
                 sh """
                   mvn clean install \
                   -Ptest \
