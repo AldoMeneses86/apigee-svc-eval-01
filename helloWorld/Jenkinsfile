@@ -12,7 +12,7 @@ pipeline {
         API_VERSION = 'google'
         APIGEE_ORG = 'apigee-svc-eval-01'
         APIGEE_ENV = 'eval'
-        APIGEE_SA= '/var/jenkins_home/workspace/apigee-multibranch_features_mock/sa-apigee-deployer.json'
+        APIGEE_SA= '/var/jenkins_home/workspace/sa-apigee-deployer.json'
     }
 
     stages {
