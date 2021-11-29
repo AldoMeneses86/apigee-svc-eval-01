@@ -36,13 +36,8 @@ pipeline {
             }
           }
       }
-      stage('Deploy X/hybrid') {
-          when {
-            expression { env.API_VERSION ==  'google'}
-          }
-          dir('helloWorld') {
-            sh "pwd"
-          }
+      dir('helloWorld') {
+        sh "pwd"
       }
     }
 
