@@ -40,22 +40,9 @@ pipeline {
           when {
             expression { env.API_VERSION ==  'google'}
           }
-          steps {
-
-            sh 'cd helloWorld/'
-            sh 'export PWD=pwd'
-            sh 'echo $PWD'
-            sh 'cd $PWD/helloWorld'
-            sh 'pwd'
-            sh """
-            mvn clean install \
-                -Ptest \
-                -Denv="${env.APIGEE_ENV}" \
-                -Dorg="${env.APIGEE_ORG}" \
-                -Dfile="${env.APIGEE_SA}" 
-            """
+          dir('helloWorld') {
+            sh "pwd"
           }
-        }
     }
 
 }
