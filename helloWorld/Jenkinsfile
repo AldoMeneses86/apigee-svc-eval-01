@@ -46,7 +46,7 @@ pipeline {
             sh 'export PWD=pwd'
             sh 'echo $PWD'
             sh 'cd $PWD/helloWorld'
-            sh 'ls -l'
+            sh 'pwd'
             sh """
             mvn clean install \
                 -Ptest \
