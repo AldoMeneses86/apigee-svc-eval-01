@@ -1,0 +1,57 @@
+pipeline {
+
+    agent any
+
+    tools {
+        maven "Maven 3.8.4"
+    }
+
+    environment {
+
+
+        API_VERSION = 'google'
+        APIGEE_ORG = 'apigee-svc-eval-01'
+        APIGEE_ENV = 'eval'
+        APIGEE_SA= '/var/jenkins_home/workspace/apigee-multibranch_features_mock/sa-apigee-deployer.json'
+    }
+
+    stages {
+      stage('write') {
+           steps {
+               script {
+                   def date = new Date()
+                   def data = "Hello World\nSecond line\n" + date
+                   writeFile(file: 'zorg.txt', text: data)
+                   sh "ls -l"
+               }
+           }
+       }
+      stage('Set Apigee Env and Proxy Suffix') {
+          steps {
+            script{
+              println "---------- Branch-Dependent Build Config ----------"
+              println "Apigee Org: " + env.APIGEE_ORG
+              println "Apigee Env: " + env.APIGEE_ENV
+              println "Apigee Service Account: " + env.APIGEE_SA
+            }
+          }
+      }
+      stage('Deploy X/hybrid') {
+          when {
+            expression { env.API_VERSION ==  'google'}
+          }
+          steps {
+            sh 'pwd'
+            sh 'ls -l'
+            sh """
+            mvn clean install \
+                -Ptest \
+                -Denv="${env.APIGEE_ENV}" \
+                -Dorg="${env.APIGEE_ORG}" \
+                -Dfile="${env.APIGEE_SA}" 
+            """
+          }
+        }
+    }
+
+}
