@@ -41,7 +41,11 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            sh 'pwd'
+
+            sh 'cd helloWorld/'
+            sh 'export PWD=pwd'
+            sh 'echo $PWD'
+            sh 'cd $PWD/helloWorld'
             sh 'ls -l'
             sh """
             mvn clean install \
