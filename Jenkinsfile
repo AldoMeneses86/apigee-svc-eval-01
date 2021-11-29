@@ -41,6 +41,16 @@ pipeline {
                   -Dfile="${env.APIGEE_SA}" 
                 """
             }
+            dir('oauth_v2') {
+                sh 'pwd'
+                sh """
+                  mvn clean install \
+                  -Ptest \
+                  -Denv="${env.APIGEE_ENV}" \
+                  -Dorg="${env.APIGEE_ORG}" \
+                  -Dfile="${env.APIGEE_SA}" 
+                """
+            }
           }
         }
     }

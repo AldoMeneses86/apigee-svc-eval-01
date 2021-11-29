@@ -31,7 +31,7 @@ pipeline {
             expression { env.API_VERSION ==  'google'}
           }
           steps {
-            dir('helloWorld') {
+            dir('oauth_v2') {
                 sh 'pwd'
                 sh """
                   mvn clean install \
